@@ -38,7 +38,32 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+  let words = expr.split('**********');
+  let output = '';
+  
+  words.forEach(function(elem, i, array){
+    for (let i = 0; i < elem.length; i += 10) {
+      let letterMorse = elem.slice(i, i + 10);
+      let letter = '';
+      for (let j = 0; j < letterMorse.length; j += 2) {
+        switch (letterMorse.slice(j, j + 2)) {
+          case '00': 
+            letter += '';
+            break;
+          case '10': 
+            letter += '.';
+            break;
+          case '11': 
+            letter += '-';
+            break;
+        }
+      }
+      output += MORSE_TABLE[letter];
+    }
+    output += ' ';
+  })
+  
+  return output.slice(0, -1);
 }
 
 module.exports = {
